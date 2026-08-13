@@ -10,7 +10,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-    return "あいうえおボット起動中"
+    return "ザばとーbot起動中"
 
 def run():
     app.run(host='0.0.0.0', port=10000)
@@ -26,7 +26,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-AIUEO = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ"]
+AIUEO = ["汚いジャイアン", "ザビャンの生え際は頭頂部", "aiが可哀想", "薄い本(hikakin_mania)", "ボカロP(笑)", "インフルエンサー(笑)", "電力と水がかわいそう", "イタリアに土下座しろ", "おもんねーよ4ね", "ザビャン・アナル丸"]
 
 @bot.event
 async def on_ready():
