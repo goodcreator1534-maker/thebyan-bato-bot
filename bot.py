@@ -31,7 +31,20 @@ AIUEO = ["汚いジャイアン", "ザビャンの生え際は頭頂部", "aiが
 @bot.event
 async def on_ready():
     print(f"ログイン: {bot.user}")
+    # スラッシュコマンドをDiscordに登録
+    try:
+        synced = await bot.tree.sync()
+        print(f"スラッシュコマンド {len(synced)}個 同期完了")
+    except Exception as e:
+        print(f"同期エラー: {e}")
 
+# ===== スラッシュコマンド =====
+@bot.tree.command(name="ひらがな", description="ランダムにひらがなを返す")
+async def hiragana(interaction: discord.Interaction):
+    reply = random.choice(AIUEO)
+    await interaction.response.send_message(reply)
+
+# ===== メンション反応（従来通り）=====
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
