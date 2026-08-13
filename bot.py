@@ -37,11 +37,10 @@ async def safe_send(channel, content):
     """レート制限に引っかかっても自動で待機して再送信"""
     while True:
         try:
-            await channel.send(content)
-            return
+            return await channel.send(content)
         except discord.HTTPException as e:
             if e.status == 429:
-                wait = getattr(e, 'retry_after', 2)
+                wait = e.retry_after if hasattr(e, 'retry_after') else 2
                 await asyncio.sleep(wait)
             else:
                 raise
@@ -69,7 +68,8 @@ async def ike(interaction: discord.Interaction, 回数: int = 1):
     回数 = max(1, 回数)
     stop_flag = False
     
-    await interaction.response.send_message(f"{回数}連投開始するで")
+    # 応答を遅延させてタイムアウトを防ぐ（無言で開始）
+    await interaction.response.defer()
     channel = interaction.channel
     
     for i in range(回数):
@@ -80,7 +80,8 @@ async def ike(interaction: discord.Interaction, 回数: int = 1):
             
         reply = random.choice(AIUEO)
         await safe_send(channel, reply)
-        await asyncio.sleep(1.0)
+        if i < 回数 - 1:
+            await asyncio.sleep(1.0)
     
     stop_flag = False
 
@@ -92,7 +93,7 @@ async def saensu(interaction: discord.Interaction, 回数: int = 1):
     回数 = max(1, 回数)
     stop_flag = False
     
-    await interaction.response.send_message(f"{回数}連投開始するで")
+    await interaction.response.defer()
     channel = interaction.channel
     
     for i in range(回数):
@@ -101,8 +102,9 @@ async def saensu(interaction: discord.Interaction, 回数: int = 1):
             stop_flag = False
             return
             
-        await safe_send(channel, "こんにちわんこ")
-        await asyncio.sleep(1.0)
+        await safe_send(channel, "設x設x設x設x 愛液愛液愛液愛液　えっちえっちえっちえっち　抜ける👍抜ける👍抜ける👍抜ける👍　射精射精射精射精　ごしごしごしごし　膣膣膣膣　お尻お尻お尻お尻　変態変態変態変態　満己満己満己満己　TN己TN己TN己TN己　クンニクンニクンニクンニ　オナニーオナニーオナニーオナニー　アナ、ゥアナ、ゥアナ、ゥアナ、ゥ　金玉金玉金玉金玉　イラマチオ イラマチオ イラマチオ イラマチオ　スカトロ スカトロ スカトロ スカトロ　マスカキ マスカキ マスカキ マスカキ　中出し中出し中出し中出し　淫乱淫乱淫乱淫乱　クリトリス クリトリス クリトリス　潮吹き 潮吹き 潮吹き 潮吹き　ロリコン ロリコン ロリコン ロリコン　手コキ手コキ手コキ手コキ　満己満己満己満己　イクイクイクイク　エロエロエロエロ　マラマラマラマラ　TENGA TENGA TENGA TENGA TN TN TN TN カキカキカキカキ　アナニーアナニーアナニーアナニー　卑猥卑猥卑猥卑猥　強姦強姦強姦強姦　青姦青姦青姦青姦　痴漢痴漢痴漢痴漢　和姦和姦和姦和姦　近親相姦 近親相姦 近親相姦　ふたなり ふたなり ふたなり ふたなり　下ネタ下ネタ下ネタ下ネタ　陰毛陰毛陰毛陰毛　孕ませ孕ませ孕ませ孕ませ　亀頭亀頭亀頭　股股股股　早漏早漏早漏")
+        if i < 回数 - 1:
+            await asyncio.sleep(1.0)
     
     stop_flag = False
 
