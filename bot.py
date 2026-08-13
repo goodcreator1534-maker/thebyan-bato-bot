@@ -66,8 +66,37 @@ async def ike(interaction: discord.Interaction, 回数: int = 1):
             
         reply = random.choice(AIUEO)
         await interaction.followup.send(reply)
-        if i < 回数 - 1:
-            await asyncio.sleep(0.01)
+        
+        # 0.001秒待ちつつ細切れで停止チェック
+        for _ in range(10):
+            if stop_flag:
+                break
+            await asyncio.sleep(0.001)
+    
+    stop_flag = False
+
+@bot.tree.command(name="さえんす", description="なんだ亀頭か")
+@app_commands.describe(回数="何回送るか")
+async def saensu(interaction: discord.Interaction, 回数: int = 1):
+    global stop_flag
+    
+    回数 = max(1, 回数)
+    stop_flag = False
+    
+    await interaction.response.defer()
+    
+    for i in range(回数):
+        if stop_flag:
+            await interaction.followup.send("止めたで")
+            stop_flag = False
+            return
+            
+        await interaction.followup.send("設x設x設x設x 愛液愛液愛液愛液　えっちえっちえっちえっち　抜ける👍抜ける👍抜ける👍抜ける👍　射精射精射精射精　ごしごしごしごし　膣膣膣膣　お尻お尻お尻お尻　変態変態変態変態　満己満己満己満己　TN己TN己TN己TN己　クンニクンニクンニクンニ　オナニーオナニーオナニーオナニー　アナ、ゥアナ、ゥアナ、ゥアナ、ゥ　金玉金玉金玉金玉　イラマチオ イラマチオ イラマチオ イラマチオ　スカトロ スカトロ スカトロ スカトロ　マスカキ マスカキ マスカキ マスカキ　中出し中出し中出し中出し　淫乱淫乱淫乱淫乱　クリトリス クリトリス クリトリス　潮吹き 潮吹き 潮吹き 潮吹き　ロリコン ロリコン ロリコン ロリコン　手コキ手コキ手コキ手コキ　満己満己満己満己　イクイクイクイク　エロエロエロエロ　マラマラマラマラ　TENGA TENGA TENGA TENGA TN TN TN TN カキカキカキカキ　アナニーアナニーアナニーアナニー　卑猥卑猥卑猥卑猥　強姦強姦強姦強姦　青姦青姦青姦青姦　痴漢痴漢痴漢痴漢　和姦和姦和姦和姦　近親相姦 近親相姦 近親相姦　ふたなり ふたなり ふたなり ふたなり　下ネタ下ネタ下ネタ下ネタ　陰毛陰毛陰毛陰毛　孕ませ孕ませ孕ませ孕ませ　亀頭亀頭亀頭　股股股股　早漏早漏早漏")
+        
+        for _ in range(10):
+            if stop_flag:
+                break
+            await asyncio.sleep(0.001)
     
     stop_flag = False
 
