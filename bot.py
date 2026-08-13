@@ -1,7 +1,9 @@
 import discord
 import random
 import os
+import asyncio
 from discord.ext import commands
+from discord import app_commands
 from flask import Flask
 from threading import Thread
 
@@ -42,6 +44,19 @@ async def on_ready():
 async def bato(interaction: discord.Interaction):
     reply = random.choice(AIUEO)
     await interaction.response.send_message(reply)
+
+@bot.tree.command(name="いけ", description="行ってきます")
+@app_commands.describe(回数="何回送るか")
+async def ike(interaction: discord.Interaction, 回数: int = 1):
+    回数 = max(1, 回数)
+    
+    await interaction.response.defer()
+    
+    for i in range(回数):
+        reply = random.choice(AIUEO)
+        await interaction.followup.send(reply)
+        if i < 回数 - 1:
+            await asyncio.sleep(0.01)
 
 # ===== メンション反応（従来通り）=====
 @bot.event
