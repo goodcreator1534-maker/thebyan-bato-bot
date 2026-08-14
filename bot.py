@@ -28,7 +28,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-AIUEO = ["汚いジャイアン", "ザビャンの生え際は頭頂部", "【悲報】ザビャン、地球に住んでいる", "#ヒカマーズルネサンス", "🤓←ザビャン", "迷路みたいで話が見えないよザビャンきゅん", "ザビャカスファン共、口論したいなら知識をつけてこい🤪", "反ザビャン万歳🙌", "おい、ザビャン！お前の脳みそ、カプチーノにされちゃったの？🥺", "aiが可哀想", "薄い本(hikakin_mania)", "ボカロP(笑)", "インフルエンサー(笑)", "電力と水がかわいそう", "イタリアに土下座しろ", "おもんねーよ4ね", "ザビャン・アナル丸"]
+AIUEO = ["汚いジャイアン", "ザビャンの生え際は頭頂部", "【悲報】ザビャン、地球に住んでいる", "#ヒカマーズルネサンス", "🤓←ザビャン", "迷路みたいで話が見えないよザビャンきゅん", "ザビャカスファン共、口論したいなら知識をつけてこい🤪", "反ザビャン万歳🙌", "ザビャンの脳みそ、カプチーノにされちゃったの？🥺", "aiが可哀想", "薄い本(hikakin_mania)", "ボカロP(笑)", "インフルエンサー(笑)", "電力と水がかわいそう", "イタリアに土下座しろ", "おもんねーよ4ね", "ザビャン・アナル丸"]
 
 stop_flag = False
 _synced = False
@@ -71,8 +71,6 @@ async def saensu(interaction: discord.Interaction, 回数: int = 1):
     stop_flag = False
     
     await interaction.response.defer()
-    
-    await interaction.followup.send("こんにちわんこ")
     
     for i in range(1, 回数):
         if stop_flag:
